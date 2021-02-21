@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+    {% comment %} 
+    This is a leaderboard section which shows the players with the top scores!
+    {% endcomment %}
+
+    <div class="container-fluid">
+        <hr>
+        <h2> Leaderboard </h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for player in players %}
+                <tr>
+                    <td>{{player.player}}</td>
+                    <td>{{player.total}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
