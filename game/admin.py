@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+# This will register the two models in Django Administration
+admin.site.register(Game)
+admin.site.register(Leaderboard)
