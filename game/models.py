@@ -29,11 +29,6 @@ class Game(models.Model):
 
     @property
     def next_player(self):
-        """
-        Returns 'X' if the next play is player X, otherwise 'O'.
-        This is easy to calculate based on how many plays have taken place:
-        if X has played more than O, it's O's turn; otherwise, X plays.
-        """
         # Counter is a useful class that counts objects to determine which player will be played next.
         # If player 1 has played more than player 2, it's player 2 turn; otherwise, player 1 plays.
         count = Counter(self.board)
