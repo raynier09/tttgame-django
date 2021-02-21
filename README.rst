@@ -33,4 +33,14 @@ Requirements
 ------------
 
 Django version 3.1.6
+psycopg2 version 2.8.6
+
+
+Developer Notes
+------------
+
+To migrate to PostgreSQL database uncomment the database configuration and provide the following information located in settings.py. 
+Remove the database configuration for sqlite3 then run the following::
+
+    python manage.py migrate
 
