@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+
+    {% comment %} 
+    This section will display if the game is running, winner of the game or the game is considered a draw.
+    After the game is finish there will be a link to start another new game.
+    Score will be count after game is over. 
+    {% endcomment %}
+
+    {% with next_player=game.next_player game_over=game.is_game_over %}
+        {% if game_over == 'X' %}
+            <h1>{{game.player_x}} Wins !</h1>
+            <a href="{% url 'game:index' %}">Start a new game</a>
+        {% elif game_over == 'O' %}
+            <h1>{{game.player_o}} Wins !</h1>
+            <a href="{% url 'game:index' %}">Start a new game</a>
+        {% elif game_over == ' ' %}
+            <h1>Draw</h1>
+            <a href="{% url 'game:index' %}">Start a new game</a>
+        {% else %}
+            <h1>{{ next_player }} to play</h1>
+        {% endif %}
+    
+     {% comment %} 
+        This section is Tic Tac Toe Board that can be played either user input 
+        or clicking the desired cell on the board. It throws the exception if 
+        the user input is invalid or not acceptable. 
+     
+     {% endcomment %}
+        <div class="board">
+            <div class="t_row">
+                {% include "includes/square.html" with game=game index=0 play=game.board.0 %}
+                {% include "includes/square.html" with game=game index=1 play=game.board.1 %}
+                {% include "includes/square.html" with game=game index=2 play=game.board.2 %}
+            </div>
+            <div class="t_row">
+                {% include "includes/square.html" with game=game index=3 play=game.board.3 %}
+                {% include "includes/square.html" with game=game index=4 play=game.board.4 %}
+                {% include "includes/square.html" with game=game index=5 play=game.board.5 %}
+            </div>
+            <div class="t_row">
+                {% include "includes/square.html" with game=game index=6 play=game.board.6 %}
+                {% include "includes/square.html" with game=game index=7 play=game.board.7 %}
+                {% include "includes/square.html" with game=game index=8 play=game.board.8 %}
+            </div>
+        </div>
+    
+    {% endwith %}
+    
+    <hr>
+
+    {% comment %} 
+        Note: This user inputs only accepts integer value ranging from 0 to 8.
+    {% endcomment %}
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="inputPassword2" class="sr-only">Password</label>
+            <input type="integer" name="index" class="form-control" value="{{ index }}" placeholder="Enter From 0-8">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">submit</button>
+    </form>
+    
+    {% comment %} 
+    This section will provide an instruction for players.
+    {% endcomment %}
+    <p> You can enter your move either in input field or click any cell on the playing board </p>
+    <p> On the input field you can input from 0-8 (From Left to Right - Top to Bottom)</p>
+
+{% endblock %}
